@@ -23,7 +23,7 @@ function calculator(val){
     let screen   = document.getElementById('display');
     let err_msg  = document.getElementById('err_msg');
     let fir,sec, res, rval = parseInt(val);
-
+    
     try{
         if(isNaN(rval) && screen.value === '')
           throw "operator can not be placed first without operand";
@@ -37,6 +37,8 @@ function calculator(val){
             if(operand1 !== ''){
                 if(operator === ''){
                     if(val === '.'){
+
+                        var dot_value = true;
                         if(operand2 === '') operand1 += val;
                         else operand2 += val;
                         screen.value += val;
@@ -48,10 +50,16 @@ function calculator(val){
                 }
                 else{
                     
+                    if(!dot_value){
                     fir = parseInt(operand1);
                     sec = parseInt(operand2);
+                    }
+                    else {
+                        fir = parseFloat(operand1);
+                        sec = parseFloat(operand2);
+                    }
                     res = 0;     
-
+                    
                     try{
                         if(fir == NaN || sec == NaN) throw "All operand must be number";
                     }
